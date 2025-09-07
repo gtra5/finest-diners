@@ -1,8 +1,24 @@
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
-import { useState, useEffect } from "react"
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useState, useEffect } from "react";
 
- function CustomerReviews() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+function CustomerReviews() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slidesPerView, setSlidesPerView] = useState(3);
+
+  useEffect(() => {
+    const updateSlidesPerView = () => {
+      if (window.innerWidth < 640) {
+        setSlidesPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setSlidesPerView(2);
+      } else {
+        setSlidesPerView(3);
+      }
+    };
+    updateSlidesPerView();
+    window.addEventListener("resize", updateSlidesPerView);
+    return () => window.removeEventListener("resize", updateSlidesPerView);
+  }, []);
 
   const testimonials = [
     {
@@ -109,40 +125,47 @@ import { useState, useEffect } from "react"
       rating: 4.7,
       image: "/placeholder.svg?height=200&width=200",
     },
-  ]
+  ];
 
   // Auto-slide functionality
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-    }, 3000) // Change slide every 3 seconds
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    }, 3000); // Change slide every 3 seconds
 
-    return () => clearInterval(interval)
-  }, [testimonials.length])
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-  }
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
-  }
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+    );
+  };
 
   const getVisibleTestimonials = () => {
-    const visible = []
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % testimonials.length
-      visible.push({ ...testimonials[index], featured: i === 1 }) // Middle card is featured
+    const visible = [];
+    for (let i = 0; i < slidesPerView; i++) {
+      const index = (currentIndex + i) % testimonials.length;
+      visible.push({
+        ...testimonials[index],
+        featured: i === Math.floor(slidesPerView / 2),
+      }); // Middle card is featured
     }
-    return visible
-  }
+    return visible;
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900">What our customer say</h2>
+          <h2 className="text-4xl font-bold text-gray-900">
+            What our customer say
+          </h2>
           <div className="flex gap-2">
             <button
               onClick={prevSlide}
@@ -160,23 +183,38 @@ import { useState, useEffect } from "react"
         </div>
 
         {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div
+          className={`grid gap-6 grid-cols-1 ${
+            slidesPerView === 2 ? "md:grid-cols-2" : ""
+          } ${slidesPerView === 3 ? "md:grid-cols-2 lg:grid-cols-3" : ""}`}
+        >
           {getVisibleTestimonials().map((testimonial, index) => (
-            <div key={`${testimonial.id}-${currentIndex}`} className="transition-all duration-500 ease-in-out">
+            <div
+              key={`${testimonial.id}-${currentIndex}`}
+              className="transition-all duration-500 ease-in-out"
+            >
               {testimonial.featured ? (
                 // Featured testimonial card
                 <div className="bg-gradient-to-br from-purple-800 to-purple-900 rounded-3xl p-8 text-white relative overflow-hidden transform scale-105">
                   <div className="relative z-10">
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-1">{testimonial.name}</h3>
-                      <p className="text-purple-200 text-sm">{testimonial.role}</p>
+                      <h3 className="text-xl font-semibold mb-1">
+                        {testimonial.name}
+                      </h3>
+                      <p className="text-purple-200 text-sm">
+                        {testimonial.role}
+                      </p>
                     </div>
 
-                    <p className="text-lg leading-relaxed mb-6">{testimonial.text}</p>
+                    <p className="text-lg leading-relaxed mb-6">
+                      {testimonial.text}
+                    </p>
 
                     <div className="flex items-center gap-2">
                       <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                      <span className="font-semibold">({testimonial.rating})</span>
+                      <span className="font-semibold">
+                        ({testimonial.rating})
+                      </span>
                     </div>
                   </div>
 
@@ -192,7 +230,9 @@ import { useState, useEffect } from "react"
               ) : (
                 // Regular testimonial card
                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-                  <p className="text-gray-700 text-lg leading-relaxed mb-8">{testimonial.text}</p>
+                  <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                    {testimonial.text}
+                  </p>
 
                   <div className="flex items-center gap-3">
                     <img
@@ -201,8 +241,12 @@ import { useState, useEffect } from "react"
                       className="w-12 h-12 rounded-full object-cover"
                     />
                     <div>
-                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                      <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                      <h4 className="font-semibold text-gray-900">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-gray-500 text-sm">
+                        {testimonial.role}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -225,6 +269,6 @@ import { useState, useEffect } from "react"
         </div>
       </div>
     </div>
-  )
+  );
 }
 export default CustomerReviews;

@@ -3,11 +3,11 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import img1 from "../assets/pizzaimage.png";
 import img2 from "../assets/image.png";
 import img4 from "../assets/spagg.png";
-import img3 from "../assets/sushi.png"
-import img7 from "../assets/drinks.png"
-import img6 from "../assets/dessert.png"
-import img5 from "../assets/salad3.png"
-import img8 from "../assets/breakfast.png"
+import img3 from "../assets/sushi.png";
+import img7 from "../assets/drinks.png";
+import img6 from "../assets/dessert.png";
+import img5 from "../assets/salad3.png";
+import img8 from "../assets/breakfast.png";
 const category = [
   {
     id: 1,
@@ -19,7 +19,7 @@ const category = [
   {
     id: 2,
     name: "Burgers",
-   image: img2,
+    image: img2,
     color: "bg-orange-300",
     destination: "/burgers",
   },
@@ -33,21 +33,21 @@ const category = [
   {
     id: 4,
     name: "Pasta",
-   image: img4,
+    image: img4,
     color: "bg-yellow-300",
     destination: "/pizza",
   },
   {
     id: 5,
     name: "Salads",
-   image: img5,
+    image: img5,
     color: "bg-green-300",
     destination: "/pizza",
   },
   {
     id: 6,
     name: "Desserts",
-   image: img6,
+    image: img6,
     color: "bg-pink-300",
     destination: "/pizza",
   },
@@ -61,7 +61,7 @@ const category = [
   {
     id: 8,
     name: "Breakfast",
-   image: img8,
+    image: img8,
     color: "bg-orange-300",
     destination: "/pizza",
   },
@@ -111,23 +111,27 @@ function Categories() {
     <div className="w-full max-w-7xl  ">
       <div className="relative">
         {/* Navigation Arrows */}
-        <button
-          onClick={goToPrevious}
-          disabled={currentIndex === 0}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-gray-300 disabled:opacity-300 disabled:cursor-not-allowed transition-all duration-300"
-          aria-label="Previous categories"
-        >
-          <MdKeyboardArrowLeft className="w-6 h-6 text-gray-600" />
-        </button>
+        {currentIndex > 0 && (
+          <button
+            onClick={goToPrevious}
+            disabled={currentIndex === 0}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-gray-300 disabled:opacity-300 disabled:cursor-not-allowed transition-all duration-300"
+            aria-label="Previous categories"
+          >
+            <MdKeyboardArrowLeft className="w-6 h-6 text-gray-600" />
+          </button>
+        )}
 
-        <button
-          onClick={goToNext}
-          disabled={currentIndex >= maxIndex}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-gray-300 disabled:opacity-300 disabled:cursor-not-allowed transition-all duration-300"
-          aria-label="Next categories"
-        >
-          <MdKeyboardArrowRight className="w-6 h-6 text-gray-600" />
-        </button>
+        {currentIndex < maxIndex && (
+          <button
+            onClick={goToNext}
+            disabled={currentIndex >= maxIndex}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-gray-300 disabled:opacity-300 disabled:cursor-not-allowed transition-all duration-300"
+            aria-label="Next categories"
+          >
+            <MdKeyboardArrowRight className="w-6 h-6 text-gray-600" />
+          </button>
+        )}
 
         {/* Carousel Container */}
         <div className="overflow-hidden mx-8">
@@ -148,18 +152,18 @@ function Categories() {
                   onClick={() => handleCategoryClick(foodtype.destination)}
                   className={`${foodtype.color} rounded-xl p-4 h-24 sm:h-28 md:h-32 flex flex-col  cursor-pointer hover:scale-105 transition-transform duration-300 shadow-sm hover:shadow-md`}
                 >
-                  
-                 <div className="text-left "> <h3 className="md:text-xl font-medium text-gray-700">
-                    {foodtype.name}
-                  </h3></div>
-                  <img  className="  lg:w-full" src={foodtype.image} />
+                  <div className="text-left ">
+                    {" "}
+                    <h3 className="md:text-xl font-medium text-gray-700">
+                      {foodtype.name}
+                    </h3>
+                  </div>
+                  <img className="  lg:w-full" src={foodtype.image} />
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-      
       </div>
     </div>
   );

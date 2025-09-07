@@ -51,12 +51,12 @@ const food3 = [
 function Menu({ addToCart, cartItemCount }) {
   return (
     <Layout cartItemCount={cartItemCount}>
-      <div className="w-full flex h-fit flex-col-reverse bg-blue-400 rounded-2xl p-2 items-center justify-center bg-gray-200 lg:flex-row h-120 bg-cover bg-center">
+      <div className="w-full flex h-fit flex-col-reverse bg-blue-400 rounded-2xl  items-center justify-center bg-gray-200 lg:flex-row h-120 bg-cover bg-center">
         <div className="w-full  lg:w-1/2 p-8  lg:text-left  rounded-lg ">
           <h1 className="text-2xl text-center lg:text-7xl font-bold text-left">
             Sushi
           </h1>
-          <p className="text-xl text-left p-2 pt-3 ">
+          <p className="text-lg text-left  pt-3 ">
             From classic maki and nigiri to inside-out uramaki and hearty
             futomaki, Finest diner delivers a wide selection of delicious sushi
             right to your doorstep.

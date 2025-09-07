@@ -52,12 +52,12 @@ const foods = [
 function Burgers({ addToCart, cartItemCount }) {
   return (
     <Layout cartItemCount={cartItemCount}>
-      <div className="w-full flex h-fit flex-col-reverse bg-blue-400 rounded-2xl p-2 items-center justify-center bg-gray-200 lg:flex-row h-120 bg-cover bg-center">
+      <div className="w-full flex h-fit flex-col-reverse bg-blue-400 rounded-2xl p-0 items-center justify-center bg-gray-200 lg:flex-row h-120 bg-cover bg-center md:p-2">
         <div className="w-full  lg:w-1/2 p-8  lg:text-left  rounded-lg ">
           <h1 className="text-2xl text-center lg:text-7xl font-bold text-left">
             Burgers
           </h1>
-          <p className="text-xl text-left p-2 pt-3 ">
+          <p className="text-lg text-left pt-3 justify-center lg:text-lg lg:px-0">
             Hungry for a burger that hits the spot? Whether you’re craving a
             classic cheeseburger, a spicy grilled chicken stack, or a
             gourmet-loaded masterpiece, Finest diners brings Nigeria’s best

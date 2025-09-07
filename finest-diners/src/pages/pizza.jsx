@@ -52,12 +52,12 @@ const food2 = [
 function Pizza({ addToCart, cartItemCount }) {
   return (
     <Layout cartItemCount={cartItemCount}>
-      <div className="w-full flex h-fit flex-col-reverse bg-blue-400 rounded-2xl p-2 items-center justify-center bg-gray-200 lg:flex-row h-120 bg-cover bg-center">
+      <div className="w-full flex h-fit flex-col-reverse bg-blue-400 rounded-2xl  items-center justify-center bg-gray-200 lg:flex-row h-120 bg-cover bg-center">
         <div className="w-full  lg:w-1/2 p-8  lg:text-left  rounded-lg ">
           <h1 className="text-2xl text-center lg:text-7xl font-bold text-left">
             Pizza
           </h1>
-          <p className="text-xl text-left p-2 pt-3 ">
+          <p className="text-lg text-left  pt-3 ">
             Craving pizza but don’t feel like cooking? With Finest diners, you
             can enjoy the best pizzas from top restaurants in Nigeria—without
             even leaving your couch!
@@ -81,7 +81,7 @@ function Pizza({ addToCart, cartItemCount }) {
       </div>
 
       <div className="burgercard">
-        <div className="w-full h-12 mt-14 text-2xl lg:">Pizza</div>
+        <div className="w-full h-12 mt-14 text-2xl  lg:">Pizza</div>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 lg:gap-8 mt-5 px-4">
           {food2.map((item) => (
             <div key={item.id} className="flex justify-center">
